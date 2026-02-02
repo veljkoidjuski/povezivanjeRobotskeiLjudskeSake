@@ -1,0 +1,107 @@
+\input amstex
+\input epsf
+
+\documentstyle{amsppt}
+
+\magnification=\magstep1
+
+\def\abstractname{}
+
+\def\dj{d\kern-0.5em\raise0.3em\hbox{--}}
+
+\topmatter
+
+\title
+Model ,,kinderica''
+\endtitle
+
+\abstract
+Ovaj model nazvan je ,,kinderica'' jer oblikom podse\'ca na \v{c}okoladice kinder. On opisuje kretanje prsta na\v{s}e robotske \v{s}ake pri povla\v{c}enju tetive. Potreban je da bi se iz koordinata vrha prsta dobijenih trijangulacijom odlu\v{c}ilo koliko je potrebno zarotirati odgovaraju\'ci servo motor. Implementiran je u obliku lookup tabele u programskoj memoriji.
+\endabstract
+
+\author
+Sekcija robotike ST\v{S} Sombor
+\endauthor
+
+\endtopmatter
+
+\head Matemati\v{c}ka formulacija \endhead
+
+\vskip1\baselineskip
+
+\centerline
+{
+\epsfxsize=0.8\hsize
+\epsfbox{model.eps}
+}
+
+\vskip1\baselineskip
+
+\centerline{Slika 1. \it skica modela }
+
+\vskip1\baselineskip
+
+Modeluje se kretanje prsta u zavisnosti od povla\v{c}enja tetiva. Zasad prst ima jedan stepen slobode, pa je dovoljno modelovati $f: \Delta l \mapsto x$, gde je $\Delta l$ promena du\v{z}ine tetive, a $x$ projekcija vrha prsta na osu paralelnu opru\v{z}enom prstu. (jednozna\v{c}no je $g:x \mapsto \underline{a}$, gde je $\underline{a} = \left (\smallmatrix x \cr y \cr \endsmallmatrix \right )$ , a $y$ osa normalna na opru\v{z}en prst).
+
+
+$$
+\cases
+\underline{a} = \displaystyle \sum_{i=0}^3 \underline{a}_i\\
+\underline{a}_i = le^{ji(\phi_0 - \phi)}\\
+\phi = \phi(\Delta l)
+\endcases
+$$
+($\phi_0$ --- maks. vrednost $\phi$, $\phi_0 > 0,\, 0 \le \phi \le \phi_0$)
+
+$$
+\align
+\Longrightarrow x &= \Re\left ( \left ( l(e^{j0} + e^{j(\phi_0 - \phi)} + e^{j2(\phi_0 - \phi)} + e^{j3(\phi_0 - \phi)} \right) \right)\\
+&= l\left(1+\cos(\phi_0 - \phi)+\cos2(\phi_0 - \phi)+\cos3(\phi_0 - \phi)\right)\\
+&= 2l\left(2\cos^3(\phi_0 - \phi) + \cos^2(\phi_0 - \phi) - \cos(\phi_0 - \phi) \right)
+\endalign
+$$
+
+
+\newpage
+$$
+\cases
+\phi = 2 \, \text{arctg} \, \sigma\\
+\Delta l = 6\sigma_0 - 6\sigma
+\endcases
+$$
+($\sigma_0$ --- maks. vrednost $\sigma$, $\sigma_0 > 0,\, 0 \le \sigma \le \sigma_0 ,\,0 \le \Delta l \le 6\sigma_0$)
+
+$$
+\iff \phi = 2 \, \text{arctg} \left (\sigma_0 - \frac{\Delta l}{6} \right )
+$$
+
+
+$$
+\align
+\Longrightarrow x = 2l \biggl( 2&\cos^3\left(\phi_0 - 2 \, \text{arctg} \left (\sigma_0 - \frac{\Delta l}{6} \right ) \right) \\  + &\cos^2\left(\phi_0 - 2 \, \text{arctg} \left (\sigma_0 - \frac{\Delta l}{6} \right ) \right)\\ - &\cos\,\left.\left(\phi_0 - 2 \, \text{arctg} \left (\sigma_0 - \frac{\Delta l}{6} \right ) \right) \right)
+\endalign
+$$
+
+$$
+\eqno(*)
+$$
+
+\proclaim{Model ,,kinderica''} Vrh prsta kre\'ce se po zakonu $(*)$.
+\endproclaim
+
+\head Implementacija \endhead
+
+Funkciju $x = x(\Delta l)$ treba fitovati kroz merenja prsta. Oblik funkcije za potrebe fitovanja glasi:
+
+$$
+\align
+\Longrightarrow x = \alpha_1 \biggl( 2&\cos^3 2\left(\text{arctg} \, \alpha_2 - \text{arctg} \left (\alpha_2 - \frac{\Delta l}{6} \right ) \right) \\  + &\cos^2 2 \left( \text{arctg} \, \alpha_2 -  \, \text{arctg} \left (\alpha_2 - \frac{\Delta l}{6} \right ) \right)\\ - &\cos\,\left.2 \left( \text{arctg} \, \alpha_2 -  \text{arctg} \left (\alpha_2 - \frac{\Delta l}{6} \right ) \right) \right) \\
++ &\alpha_3
+\endalign
+$$
+
+gde su $\alpha_1$, $\alpha_2$ i $\alpha_3$ slobodni parametri fita. Parametar $\alpha_3$ uveden je radi slobode definicije koordinatnog po\v{c}etka.
+
+Primetimo da je, u stvari, za upravljanje prstom potreban inverz ove funkcije. Me\dj utim, nema potrebe saznavati ga analiti\v{c}ki. Skup mogu\'cih uglova rotacije motora je diskretan, pa se funkcija mo\v{z}e evaluirati za svaki ugao pojedina\v{c}no.
+
+\bye

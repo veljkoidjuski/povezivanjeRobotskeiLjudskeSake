@@ -1,0 +1,36 @@
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/TeX Live for SUSE Linux) (preloaded format=xetex 2026.1.16)  2 FEB 2026 18:58
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**kinderica.tex ../kinderica.pdf
+(./kinderica.tex (/usr/share/texmf/tex/amstex/base/amstex.tex
+
+AmS-TeX- Version 2.2
+
+Loading definitions for misc utility macros, page layout, accents/punctuation,
+line and page breaks, figures, comments, math spacing, fractions,
+smash commands, large operator symbols, integrals, operator names,
+multilevel sub/superscripts, matrices, multiline displays,
+continued fractions, compound symbols, various kinds of dots,
+special superscripts, \text, math font commands, \newsymbol,
+bold Greek and bold symbols, Euler fonts, math accents, roots,
+commutative diagrams, poor man's bold, syntax check, ... finished)
+(/usr/share/texmf/tex/generic/epsf/epsf.tex
+This is `epsf.tex' v2.7.4 <14 February 2011>
+)
+
+(/usr/share/texmf/tex/amstex/base/amsppt.sty version 2.2 (2001/08/07):
+Loading utility definitions, more fonts, page dimension settings, top matter,
+section heads, theorems/proofs/definitions/remarks, rosters, footnotes,
+figures and captions, miscellaneous, references, end of document,
+output routine,
+\copyins=\insert252
+ hyphenation exceptions (U.S. English)
+(/etc/texmf/tex/amstex/base/amsppt.sti symbol names
+(/usr/share/texmf/tex/plain/amsfonts/amssym.tex) ,)
+
+)
+(model.eps
+)
+[1] [2] )
+Output written on kinderica.pdf (2 pages).
