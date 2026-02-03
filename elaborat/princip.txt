@@ -1,0 +1,19 @@
+Овде иде текст принципа рада и практичне реализацијe. Једначина сингуларне декомпозиције:
+
+$$
+\mathbfit{M} = \mathbfit{U}\mathbfit{\Sigma}^2\mathbfit{V}^\dagger
+\eqno(1)
+$$
+
+\begin{figure}
+\centering
+\includegraphics{slika.png}
+\caption{
+\textit
+{
+    Текст испод слике
+}
+}
+\end{figure}
+ \lipsum[1-6]
+

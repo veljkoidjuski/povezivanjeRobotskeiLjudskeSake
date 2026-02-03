@@ -1,0 +1,96 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{amsmath}
+\usepackage{fontspec}
+\usepackage{mathspec}
+\setmathfont{Latin Modern Math}
+\DeclareMathAlphabet      {\mathbfit}{OML}{cmm}{b}{it}
+\setmainfont{Nimbus Roman}
+
+\makeatletter
+\renewcommand\footnotesize{%
+  \@setfontsize\footnotesize{10pt}{12pt}}
+\makeatother
+\usepackage{caption}
+\captionsetup{font=footnotesize}
+\usepackage{lipsum}
+\usepackage{geometry}
+\usepackage{afterpage}
+\usepackage{graphicx}
+\usepackage[serbianc]{babel}
+\geometry{top=2cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
+
+\usepackage{setspace}
+\usepackage{microtype}
+
+\linespread{1.5}
+
+\begin{document}
+\phantom{m}\vskip3cm
+
+\begin{center}
+\textls[250]{\textbf{\fontsize{14pt}{21pt}\selectfont{ПОВЕЗИВАЊЕ РОБОТСКЕ И ЉУДСКЕ ШАКЕ}}}
+
+\textls[250]{\textbf{\fontsize{14pt}{21pt}\selectfont{CONNECTING ROBOTIC AND HUMAN HANDS}}}
+
+\vskip1\baselineskip
+
+\phantom{.}\hfil \textbf{АЛЕКСЕЈ ГУДЕЉ} \hfil \textbf{МИЛОШ МЕЋАВА} \hfil \textbf{ВЕЉКО ИЂУШКИ} \hfil \phantom{.}
+
+3. и 4. разред Средње техничке школе Сомбор
+
+\vskip1\baselineskip
+
+\textls[250]{МЕНТОРИ}
+
+\vskip1\baselineskip
+
+\textbf{МАРИЈАНА БОГДАНОВИЋ}
+
+дипл. инж. електротехнике и рачунарства, СТШ Сомбор
+
+\vskip1\baselineskip
+
+\textbf{ГОРАН ОПСЕНИЦА}
+
+(унети звање), Bosch Србија
+
+\end{center}
+
+
+\vskip1\baselineskip
+
+
+\centerline{\textls[250]{\textbf{1. РЕЗИМЕ}}}
+\vskip1\baselineskip
+\input{rezime.txt}
+
+
+\newpage
+
+\centerline{\textls[250]{\textbf{2. ПРИНЦИП РАДА И ПРАКТИЧНА РЕАЛИЗАЦИЈА}}}
+\vskip1\baselineskip
+\input{princip.txt}
+
+\vskip1\baselineskip
+\centerline{\textls[250]{\textbf{3. РЕЗУЛТАТ}}}
+\vskip1\baselineskip
+\input{rezultati.txt}
+
+\vskip1\baselineskip
+\centerline{\textls[250]{\textbf{4. ЗАКЉУЧАК}}}
+\vskip1\baselineskip
+\input{zakljucak.txt}
+
+\vskip1\baselineskip
+\centerline{\textls[250]{\textbf{5. ЗАХВАЛНИЦА}}}
+\vskip1\baselineskip
+\input{zahvalnica.txt}
+
+\fontsize{10pt}{15pt}\selectfont
+
+\vskip1\baselineskip
+\centerline{\textls[250]{\textbf{6. ЛИТЕРАТУРА И РЕФЕРЕНЦЕ}}}
+\vskip1\baselineskip
+\input{literatura.txt}
+
+\end{document}
