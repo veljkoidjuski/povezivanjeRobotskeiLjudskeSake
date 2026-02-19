@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/TeX Live for SUSE Linux) (preloaded format=xetex 2026.2.3)  19 FEB 2026 14:13
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/TeX Live for SUSE Linux) (preloaded format=xetex 2026.2.3)  19 FEB 2026 15:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -17,17 +17,88 @@ bold Greek and bold symbols, Euler fonts, math accents, roots,
 commutative diagrams, poor man's bold, syntax check, ... finished)
 (/usr/share/texmf/tex/generic/epsf/epsf.tex
 This is `epsf.tex' v2.7.4 <14 February 2011>
-)
+) (/usr/share/texmf/tex/eplain/eplain.tex)
 
 (/usr/share/texmf/tex/amstex/base/amsppt.sty version 2.2 (2001/08/07):
 Loading utility definitions, more fonts, page dimension settings, top matter,
 section heads, theorems/proofs/definitions/remarks, rosters, footnotes,
 figures and captions, miscellaneous, references, end of document,
 output routine,
-\copyins=\insert252
+\copyins=\insert251
  hyphenation exceptions (U.S. English)
 (/etc/texmf/tex/amstex/base/amsppt.sti symbol names
 (/usr/share/texmf/tex/plain/amsfonts/amssym.tex) ,)
 
-) [1] )
-Output written on hardver.pdf (1 page).
+) (/usr/share/texmf/tex/plain/graphics-pln/miniltx.tex
+
+Defining generic filename parser.
+
+)
+(/usr/share/texmf/tex/latex/graphics/graphicx.sty
+graphicx.sty: 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/keyval.sty
+keyval.sty: 2022/05/29 v1.15 key=value parser (DPC)
+)
+(/usr/share/texmf/tex/latex/graphics/graphics.sty
+graphics.sty: 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/trig.sty
+trig.sty: 2023/12/02 v1.11 sin cos tan (DPC)
+)
+(/usr/share/texmf/tex/latex/graphics-cfg/graphics.cfg
+graphics.cfg: 2016/06/04 v1.11 sample graphics configuration
+)
+graphics: Driver file: xetex.def
+
+(/usr/share/texmf/tex/latex/graphics-def/xetex.def
+xetex.def: 2022/09/22 v5.0n Graphics/color driver for xetex
+))) [1] [2]
+alfa.jpg: Graphic file (type bmp)
+<alfa.jpg>
+sema.png: Graphic file (type bmp)
+<sema.png>
+
+Overfull \hbox (110.66438pt too wide) detected at line 91
+ []  [] |
+
+\hbox(587.0+0.0)x360.0, glue set - 1.0
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\vbox(587.0+0.0)x143.9978, glue set 180.45596fill
+..\hbox(4.30554+0.0)x8.33336
+..\glue 0.0 plus 1.0fill
+..\glue(\lineskip) 1.0
+..\hbox(172.78253+0.0)x143.9978, glue set 7.20033fil
+...\glue 0.0 plus 1.0fil minus 1.0fil
+...\hbox(172.78253+0.0)x129.59714 []
+...\glue 0.0 plus 1.0fil minus 1.0fil
+..\glue 12.0
+..etc.
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\glue -40.00006
+.\vbox(587.0+0.0)x360.0, glue set 90.74544fill
+..\hbox(4.30554+0.0)x8.33336
+..\glue 0.0 plus 1.0fill
+..\glue(\lineskip) 1.0
+..\hbox(352.20358+0.0)x360.0, glue set 106.4413fil
+...\glue 0.0 plus 1.0fil minus 1.0fil
+...\hbox(352.20358+0.0)x147.11742 []
+...\glue 0.0 plus 1.0fil minus 1.0fil
+..\glue 12.0
+..etc.
+.etc.
+
+[3]
+saka1.jpg: Graphic file (type bmp)
+<saka1.jpg>
+saka2.jpg: Graphic file (type bmp)
+<saka2.jpg>
+ [4]
+saka3.jpg: Graphic file (type bmp)
+<saka3.jpg>
+motor.png: Graphic file (type bmp)
+<motor.png>
+arduino.jpg: Graphic file (type bmp)
+<arduino.jpg>
+ [5] )
+Output written on hardver.pdf (5 pages).

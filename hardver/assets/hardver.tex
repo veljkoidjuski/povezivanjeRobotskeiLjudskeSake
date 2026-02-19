@@ -1,9 +1,14 @@
 \input amstex
 \input epsf
+\input eplain
 
 \documentstyle{amsppt}
 
 \magnification=\magstep1
+
+\beginpackages
+\usepackage{graphicx}
+\endpackages
 
 \def\dj{d\kern-0.5em\raise0.3em\hbox{--}}
 
@@ -23,11 +28,130 @@ Sekcija robotike ST\v{S} Sombor
 
 \endtopmatter
 
+
+\specialhead SISTEM $\pmb\alpha$ \endspecialhead
+
+
+Sistem $\alpha$ bavi se prihvatom i obradom podataka. \v{C}ine ga IBM-PC-kompatibilan ra\v{c}unar (trenutno Thinkpad X280) i dve kamere (Microsoft LifeCam VX-3000) postavljene na u horizontalnoj ravni, tako da su im sopstvene $x$ ose ortogonalne, a $y$ ose paralelne. Za potrebe fiksiranja polo\v{z}aja kamera izra\dj en je naro\v{c}it stalak od kartona. (Slika 1)
+
+\specialhead SISTEM $\pmb\omega$ \endspecialhead
+
+Sistem $\omega$ jeste izvr\v{s}ni element projekta. Njegova elektri\v{c}na \v{s}ema mo\v{z}e se videti na slici 2. \v{C}ine ga robotska \v{s}aka, servo motori i platforma Arduino Uno.
+
 \head \v{S}aka \endhead
 
-Glavna hardverska komponenta projekta jeste prototip robotske \v{s}ake, koji je sa\v{c}injen od \v{s}perplo\v{c}e koja je osnova \v{s}ake i komada ba\v{s}tenskog creva koji odgovaraju ljudskim prstima.
+Glavna hardverska komponenta projekta jeste robotska \v{s}aka (slika 3), koji je sa\v{c}injen od \v{s}perplo\v{c}e koja je osnova \v{s}ake i komada ba\v{s}tenskog creva koji odgovaraju ljudskim prstima.
 
 Svaki prst use\v{c}en je na takvim mestima da useci vr\v{s}e ulogu zglobova. Useci su tako napravljeni da verno opona\v{s}aju kretanje realne ljudske \v{s}ake.
 
-Za upravljanje prstima napravili smo tetive, za \v{s}ta smo upotrebili tanke sinteti\v{c}ke kanape. Jedan kraj svakog kanapa pri\v{c}vr\v{s}\'cen je za unutra\v{s}nju stranu vrha svakog prsta.
+Za upravljanje prstima napravili smo tetive, za \v{s}ta smo upotrebili tanke sinteti\v{c}ke kanape. Jedan kraj svakog kanapa pri\v{c}vr\v{s}\'cen je za unutra\v{s}nju stranu prsta, a drugi namotan na odgovaraju\'ci kotur. Ukupno ima dva kanapa po prstu, \v{s}to \v{c}ini da svaki prst ima dva stepena slobode. Trenutno se koristi samo jedna sajla po prstu (ona pri\v{c}vr\v{s}\'cena pri vrhu), tako da je u upotrebi 5 servo motora, a prsti imaju po jedan stepen slobode (slika 4). Druga sajla uti\v{c}e samo na zglob najbli\v{z}i dlanu i njeno potpuno izvla\v{c}enje, bez povla\v{c}enja prve tetive, \v{c}ini da se ceo prst postavi (gotovo) normalno na ravan dlana (slika 5).
+
+
+\head Servo motori i njihova uloga \endhead
+
+Veoma va\v{z}ni elektromehani\v{c}ki aktuatori u na\v{s}em projektu su pozicioni servo motori koji omogu\v{c}avaju regulisano kretanje prstiju.
+
+Servo motori su elektromehani\v{c}ki ure\dj aji. Postoje oni koji precizno reguli\v{s}u polo\v{z}aj, tj. ugao otklona, oni koji precizno reguli\v{s}u brzinu obrtanja i oni koji precizno reguli\v{s}u obrtni moment.
+
+Koristimo servo motore SG-5010 (slika 6), ugra\dj ene u podlakticu \v{s}ake. Na njihove rotore pri\v{c}vr\v{s}\'ceni su 3D \v{s}tampani koturovi na koje su namotane tetive.
+
+Za upravljanje servo motorima koristi se mikrokontrolerska platforma Arduino Uno (slika 7), koji generi\v{s}e odgovaraju\'ce PWM signale za svaki motor. Motori se, zbog velike ukupne snage, napajaju laboratorijskim napajanjem.
+
+\vfill
+
+\pagebreak
+
+\hbox to \hsize
+{
+\vbox to \vsize{
+\phantom{m}
+\vfill
+\hsize=0.4\hsize
+\centerline{\includegraphics[keepaspectratio, width = 0.9\hsize]{alfa.jpg}}
+\vskip\baselineskip
+\centerline{ Slika 1. \it Sistem $\alpha$}
+\vskip\baselineskip
+\vfill
+\phantom{m}
+}
+
+\hskip-4em
+
+\vbox to \vsize
+{
+\phantom{m}
+\vfill
+\centerline{\includegraphics[keepaspectratio, height = .6\vsize]{sema.png}}
+\vskip\baselineskip
+\centerline{ Slika 2. \it elektri\v{c}na \v{s}ema sistema $\omega$}
+\vskip\baselineskip
+\vfill
+\phantom{m}
+}
+}
+
+
+
+\pagebreak
+\phantom{m}
+\vfill
+
+\centerline{\includegraphics[keepaspectratio, width = .5\hsize]{saka1.jpg}}
+\vskip\baselineskip
+\centerline{ Slika 3. \it robotska \v{s}aka}
+\vskip\baselineskip
+
+\vfill
+
+\centerline{\includegraphics[keepaspectratio, width = .5\hsize]{saka2.jpg}}
+\vskip\baselineskip
+\centerline{ Slika 4. \it polo\v{z}aj prsta pri maksimalnom izvla\v{c}enju tetive koja je u upotrebi}
+\vskip\baselineskip
+
+\vfill
+
+\pagebreak
+\phantom{m}
+\vfill
+
+\centerline{\includegraphics[keepaspectratio, width = .5\hsize]{saka3.jpg}}
+\vskip\baselineskip
+\centerline{ Slika 5. \it polo\v{z}aj prsta pri maksimalnom izvla\v{c}enju druge tetive}
+\vskip\baselineskip
+
+\vfill
+
+\hbox to \hsize
+{
+\vbox
+{
+\hsize=0.4\hsize
+
+\centerline{\includegraphics[keepaspectratio, width = \hsize]{motor.png}}
+\vskip\baselineskip
+\centerline{ Slika 6. \it kori\v{s}\'ceni servo motor}
+\vskip\baselineskip
+
+}
+
+\hfill
+
+\vbox
+{
+\hsize=0.4\hsize
+
+\centerline{\includegraphics[keepaspectratio, width = \hsize]{arduino.jpg}}
+\vskip\baselineskip
+\centerline{ Slika 7. \it platforma Arduino Uno}
+\vskip\baselineskip
+
+
+}
+
+
+}
+
+\vfill
+
+
 \bye
