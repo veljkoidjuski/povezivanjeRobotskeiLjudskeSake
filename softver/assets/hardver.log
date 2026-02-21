@@ -1,0 +1,57 @@
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/TeX Live for SUSE Linux) (preloaded format=xetex 2026.2.3)  20 FEB 2026 11:48
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**hardver.tex -o hardver.pdf
+(./hardver.tex (/usr/share/texmf/tex/amstex/base/amstex.tex
+
+AmS-TeX- Version 2.2
+
+Loading definitions for misc utility macros, page layout, accents/punctuation,
+line and page breaks, figures, comments, math spacing, fractions,
+smash commands, large operator symbols, integrals, operator names,
+multilevel sub/superscripts, matrices, multiline displays,
+continued fractions, compound symbols, various kinds of dots,
+special superscripts, \text, math font commands, \newsymbol,
+bold Greek and bold symbols, Euler fonts, math accents, roots,
+commutative diagrams, poor man's bold, syntax check, ... finished)
+(/usr/share/texmf/tex/generic/epsf/epsf.tex
+This is `epsf.tex' v2.7.4 <14 February 2011>
+) (/usr/share/texmf/tex/eplain/eplain.tex)
+
+(/usr/share/texmf/tex/amstex/base/amsppt.sty version 2.2 (2001/08/07):
+Loading utility definitions, more fonts, page dimension settings, top matter,
+section heads, theorems/proofs/definitions/remarks, rosters, footnotes,
+figures and captions, miscellaneous, references, end of document,
+output routine,
+\copyins=\insert251
+ hyphenation exceptions (U.S. English)
+(/etc/texmf/tex/amstex/base/amsppt.sti symbol names
+(/usr/share/texmf/tex/plain/amsfonts/amssym.tex) ,)
+
+) (/usr/share/texmf/tex/plain/graphics-pln/miniltx.tex
+
+Defining generic filename parser.
+
+)
+(/usr/share/texmf/tex/latex/graphics/graphicx.sty
+graphicx.sty: 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/keyval.sty
+keyval.sty: 2022/05/29 v1.15 key=value parser (DPC)
+)
+(/usr/share/texmf/tex/latex/graphics/graphics.sty
+graphics.sty: 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/trig.sty
+trig.sty: 2023/12/02 v1.11 sin cos tan (DPC)
+)
+(/usr/share/texmf/tex/latex/graphics-cfg/graphics.cfg
+graphics.cfg: 2016/06/04 v1.11 sample graphics configuration
+)
+graphics: Driver file: xetex.def
+
+(/usr/share/texmf/tex/latex/graphics-def/xetex.def
+xetex.def: 2022/09/22 v5.0n Graphics/color driver for xetex
+))) [1] )
+Output written on hardver.pdf (1 page).
