@@ -1,9 +1,9 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/TeX Live for SUSE Linux) (preloaded format=xetex 2026.2.3)  20 FEB 2026 11:48
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/TeX Live for SUSE Linux) (preloaded format=xetex 2026.2.3)  22 FEB 2026 20:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**hardver.tex -o hardver.pdf
-(./hardver.tex (/usr/share/texmf/tex/amstex/base/amstex.tex
+**softver.tex
+(./softver.tex (/usr/share/texmf/tex/amstex/base/amstex.tex
 
 AmS-TeX- Version 2.2
 
@@ -54,4 +54,4 @@ graphics: Driver file: xetex.def
 (/usr/share/texmf/tex/latex/graphics-def/xetex.def
 xetex.def: 2022/09/22 v5.0n Graphics/color driver for xetex
 ))) [1] )
-Output written on hardver.pdf (1 page).
+Output written on softver.pdf (1 page).

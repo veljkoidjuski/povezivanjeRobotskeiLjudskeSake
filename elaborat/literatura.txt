@@ -1,1 +1,10 @@
-[1] М. Марковић, Прва књига литературе, Издавач, Место, 1. издање, година.
+
+
+$^{(1)}$V. Iđuški, M. Mećava, A. Gudelj, Model ,,Kinderica'', Povezivanje robotske i ljudske \v{s}ake, Сомбор, 2026. \linebreak URL: \textls[-95]{\texttt{https://github.com/veljkoidjuski/povezivanjeRobotskeiLjudskeSake/blob/master/kinderica/kinderica.pdf}}
+
+$^{(2)}$R. Boomgaard, L. Dorst, Triangulation, Computer Vision, Universiteit van Amsterdam, Амстердам, 2021.
+\linebreak URL: \textls[-120]{\texttt{https://staff.fnwi.uva.nl/r.vandenboomgaard/ComputerVision/LectureNotes/CV/StereoVision/triangulation.html}}
+
+$^{(3)}$M. Embree, Matrix Methods for Computational Modeling and Data Analysis, Virginia Tech, Блексбург, 2019. URL: \textls[185]{\texttt{https://personal.math.vt.edu/embree/cmda3606/chapter6.pdf}}
+
+$^{(4)}$V. Iđuški, M. Mećava, A. Gudelj, Hardver projekta, Povezivanje robotske i ljudske \v{s}ake, Сомбор, 2026. \linebreak URL: \textls[-77]{\texttt{https://github.com/veljkoidjuski/povezivanjeRobotskeiLjudskeSake/blob/master/hardver/hardver.pdf}}

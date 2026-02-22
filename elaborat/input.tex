@@ -1,16 +1,21 @@
 \documentclass[a4paper, 12pt]{article}
 \usepackage{amsmath}
 \usepackage{fontspec}
+\usepackage{setspace}
 \usepackage{mathspec}
+%\usepackage{unicode-math}
 \usepackage{bm}
 \setmathfont{Latin Modern Math}
-\DeclareMathAlphabet      {\mathbfit}{OML}{cmm}{b}{it}
-\setmainfont{Nimbus Roman}
+%\setmathfont{XITS Math}
+%\setmainfont{Nimbus Roman}
+%\setmainfont{Times New Roman}
+\setmainfont{XITS}
 
 \makeatletter
 \renewcommand\footnotesize{%
   \@setfontsize\footnotesize{10pt}{12pt}}
 \makeatother
+
 \usepackage{caption}
 \captionsetup{font=footnotesize}
 \usepackage{lipsum}
@@ -26,30 +31,30 @@
 \linespread{1.5}
 
 \begin{document}
-\phantom{m}\vskip3cm
+\newgeometry{top=5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
 
 \begin{center}
 \textls[250]{\textbf{\fontsize{14pt}{21pt}\selectfont{ПОВЕЗИВАЊЕ РОБОТСКЕ И ЉУДСКЕ ШАКЕ}}}
 
 \textls[250]{\textbf{\fontsize{14pt}{21pt}\selectfont{CONNECTING ROBOTIC AND HUMAN HANDS}}}
 
-\vskip1\baselineskip
+\vskip.5\baselineskip
 
 \phantom{.}\hfil \textbf{ВЕЉКО ИЂУШКИ} \hfil \textbf{МИЛОШ МЕЋАВА} \hfil \textbf{АЛЕКСЕЈ ГУДЕЉ} \hfil \phantom{.}
 
 3. и 4. разред Средње техничке школе Сомбор
 
-\vskip1\baselineskip
+\vskip.75\baselineskip
 
 \textls[250]{МЕНТОРИ}
 
-\vskip1\baselineskip
+\vskip.5\baselineskip
 
 \textbf{МАРИЈАНА БОГДАНОВИЋ}
 
 дипл. инж. електротехнике, СТШ Сомбор
 
-\vskip1\baselineskip
+\vskip.5\baselineskip
 
 \textbf{ГОРАН ОПСЕНИЦА}
 
@@ -58,40 +63,41 @@
 \end{center}
 
 
-\vskip1\baselineskip
+\vskip.75\baselineskip
 
 
 \centerline{\textls[250]{\textbf{1. РЕЗИМЕ}}}
-\vskip1\baselineskip
+\vskip.5\baselineskip
 \input{rezime.txt}
 
-
-\newpage
-
+\newgeometry{top=2cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
 \centerline{\textls[250]{\textbf{2. ПРИНЦИП РАДА И ПРАКТИЧНА РЕАЛИЗАЦИЈА}}}
-\vskip1\baselineskip
+\vskip.5\baselineskip
 \input{princip.txt}
 
-\vskip1\baselineskip
+\vskip.75\baselineskip
 \centerline{\textls[250]{\textbf{3. РЕЗУЛТАТ}}}
-\vskip1\baselineskip
+\vskip.5\baselineskip
 \input{rezultati.txt}
 
-\vskip1\baselineskip
+\vskip.75\baselineskip
 \centerline{\textls[250]{\textbf{4. ЗАКЉУЧАК}}}
-\vskip1\baselineskip
+\vskip.5\baselineskip
 \input{zakljucak.txt}
 
-\vskip1\baselineskip
+\vskip.75\baselineskip
 \centerline{\textls[250]{\textbf{5. ЗАХВАЛНИЦА}}}
-\vskip1\baselineskip
+\vskip.5\baselineskip
 \input{zahvalnica.txt}
 
-\fontsize{10pt}{15pt}\selectfont
 
-\vskip1\baselineskip
+\vskip.75\baselineskip
+\fontsize{10pt}{0pt}\selectfont
+
+
 \centerline{\textls[250]{\textbf{6. ЛИТЕРАТУРА И РЕФЕРЕНЦЕ}}}
-\vskip1\baselineskip
+\vskip10pt
+
 \input{literatura.txt}
 
 \end{document}
