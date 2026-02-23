@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/TeX Live for SUSE Linux) (preloaded format=xelatex 2026.2.3)  22 FEB 2026 20:25
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/TeX Live for SUSE Linux) (preloaded format=xelatex 2026.2.3)  23 FEB 2026 01:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -461,6 +461,8 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
+File: 1.png Graphic file (type bmp)
+<1.png>
  (./princip.txt
 
 Package fontspec Info: 
@@ -501,18 +503,123 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmtt' (encoding: TU).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-)
 
-[3] (./rezultati.txt) (./zakljucak.txt) (./zahvalnica.txt)
 
-[4] (./literatura.txt
+[3]) (./rezultati.txt
+File: rezZaRad.png Graphic file (type bmp)
+<rezZaRad.png>
+) (./zakljucak.txt
+
+[4]) (./zahvalnica.txt) (./literatura.txt
 Overfull \hbox (3.37885pt too wide) in paragraph at lines 8--9
 \TU/XITS(0)/m/n/10 2019. URL: \TU/lmtt/m/n/10/185ls https://personal.math.vt.ed
 u/embree/cmda3606/chapter6.pdf 
  []
 
+
+Overfull \hbox (3.5978pt too wide) in paragraph at lines 14--15
+\TU/XITS(0)/m/n/10 URL: \TU/lmtt/m/n/10/157ls https://docs.opencv.org/4.x/dc/db
+b/tutorial_py_calibration.html 
+ []
+
+
+Package microtype Warning: OT1/cmr/m/n/10 is a legacy font.
+(microtype)                Cannot letterspace it on input line 16.
+
+
+Package microtype Warning: OT1/cmr/m/n/7 is a legacy font.
+(microtype)                Cannot letterspace it on input line 16.
+
+
+Package microtype Warning: OT1/cmr/m/n/5 is a legacy font.
+(microtype)                Cannot letterspace it on input line 16.
+
+
+Package microtype Warning: OML/cmm/m/it/10 is a legacy font.
+(microtype)                Cannot letterspace it on input line 16.
+
+
+Package microtype Warning: OML/cmm/m/it/7 is a legacy font.
+(microtype)                Cannot letterspace it on input line 16.
+
+
+Package microtype Warning: OML/cmm/m/it/5 is a legacy font.
+(microtype)                Cannot letterspace it on input line 16.
+
+
+Package microtype Warning: OMS/cmsy/m/n/10 is a legacy font.
+(microtype)                Cannot letterspace it on input line 16.
+
+
+Package microtype Warning: OMS/cmsy/m/n/7 is a legacy font.
+(microtype)                Cannot letterspace it on input line 16.
+
+
+Package microtype Warning: OMS/cmsy/m/n/5 is a legacy font.
+(microtype)                Cannot letterspace it on input line 16.
+
+
+Package microtype Warning: OMX/cmex/m/n/10 is a legacy font.
+(microtype)                Cannot letterspace it on input line 16.
+
+
+Package microtype Warning: OMX/cmex/m/n/7 is a legacy font.
+(microtype)                Cannot letterspace it on input line 16.
+
+
+Package microtype Warning: OMX/cmex/m/n/5 is a legacy font.
+(microtype)                Cannot letterspace it on input line 16.
+
+
+Package microtype Warning: OT1/cmr/bx/n/10 is a legacy font.
+(microtype)                Cannot letterspace it on input line 16.
+
+
+Package microtype Warning: OT1/cmr/bx/n/7 is a legacy font.
+(microtype)                Cannot letterspace it on input line 16.
+
+
+Package microtype Warning: OT1/cmr/bx/n/5 is a legacy font.
+(microtype)                Cannot letterspace it on input line 16.
+
+
+Package microtype Warning: OML/cmm/b/it/10 is a legacy font.
+(microtype)                Cannot letterspace it on input line 16.
+
+
+Package microtype Warning: OML/cmm/b/it/7 is a legacy font.
+(microtype)                Cannot letterspace it on input line 16.
+
+
+Package microtype Warning: OML/cmm/b/it/5 is a legacy font.
+(microtype)                Cannot letterspace it on input line 16.
+
+
+Package microtype Warning: OMS/cmsy/b/n/10 is a legacy font.
+(microtype)                Cannot letterspace it on input line 16.
+
+
+Package microtype Warning: OMS/cmsy/b/n/7 is a legacy font.
+(microtype)                Cannot letterspace it on input line 16.
+
+
+Package microtype Warning: OMS/cmsy/b/n/5 is a legacy font.
+(microtype)                Cannot letterspace it on input line 16.
+
+
+Overfull \hbox (2.82205pt too wide) in paragraph at lines 16--17
+\TU/XITS(0)/m/n/10 URL: \TU/lmtt/m/n/10/157ls https://www.cs.cmu.edu/$\OMS/cmsy
+/m/n/10 ^^X$\TU/lmtt/m/n/10/157ls 16385/s17/Slides/11.4_Triangulation.pdf 
+ []
+
 )
-Underfull \hbox (badness 10000) in paragraph at lines 10--102
+Overfull \hbox (1.90544pt too wide) in paragraph at lines 20--105
+\TU/XITS(0)/m/n/10 URL: \TU/lmtt/m/n/10/41ls https://docs.arduino.cc/language-r
+eference/en/functions/communication/serial
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 20--105
 
  []
 
@@ -529,12 +636,12 @@ L3 programming layer <2025-01-18>
 ### simple group (level 1) entered at line 4 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 10534 strings out of 474512
- 228412 string characters out of 5751823
+ 10669 strings out of 474512
+ 232202 string characters out of 5751823
  792956 words of memory out of 5000000
- 33375 multiletter control sequences out of 15000+600000
- 570307 words of font info for 118 fonts, out of 8000000 for 9000
+ 33493 multiletter control sequences out of 15000+600000
+ 570363 words of font info for 125 fonts, out of 8000000 for 9000
  914 hyphenation exceptions out of 8191
- 79i,8n,117p,1002b,294s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 79i,8n,117p,1511b,464s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on input.pdf (5 pages).

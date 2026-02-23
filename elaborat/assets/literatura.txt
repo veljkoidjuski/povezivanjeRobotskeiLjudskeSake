@@ -1,0 +1,20 @@
+
+
+$^{[1]}$V. Iđuški, M. Mećava, A. Gudelj, Model ,,Kinderica'', \textit{Povezivanje robotske i ljudske \v{s}ake}, Сомбор, 2026. \newline URL: \textls[-95]{\texttt{https://github.com/veljkoidjuski/povezivanjeRobotskeiLjudskeSake/blob/master/kinderica/kinderica.pdf}}
+
+$^{[2]}$R. Boomgaard, L. Dorst, Triangulation, \textit{Computer Vision}, Universiteit van Amsterdam, Амстердам, 2021.
+\newline URL: \textls[-120]{\texttt{https://staff.fnwi.uva.nl/r.vandenboomgaard/ComputerVision/LectureNotes/CV/StereoVision/triangulation.html}}
+
+$^{[3]}$M. Embree, \textit{Matrix Methods for Computational Modeling and Data Analysis}, Virginia Tech, Блексбург, 2019. URL: \textls[185]{\texttt{https://personal.math.vt.edu/embree/cmda3606/chapter6.pdf}}
+
+$^{[4]}$V. Iđuški, M. Mećava, A. Gudelj, Hardver projekta, \textit{Povezivanje robotske i ljudske \v{s}ake}, Сомбор, 2026. \newline URL: \textls[-77]{\texttt{https://github.com/veljkoidjuski/povezivanjeRobotskeiLjudskeSake/blob/master/hardver/hardver.pdf}}
+
+$^{[5]}$V. Iđuški, M. Mećava, A. Gudelj, Softver projekta, \textit{Povezivanje robotske i ljudske \v{s}ake}, Сомбор, 2026. \newline URL: \textls[-77]{\texttt{https://github.com/veljkoidjuski/povezivanjeRobotskeiLjudskeSake/blob/master/softver/softver.pdf}}
+
+$^{[6]}$Open Source Computer Vision, Camera Calibration, приступ 22. 2. 2026. \newline URL: \textls[157]{\texttt{https://docs.opencv.org/4.x/dc/dbb/tutorial\_py\_calibration.html}}
+
+$^{[7]}$Kris Kitani, Triangulation, \textit{16-385 Computer Vision}, Carnegie Mellon University, Питсбург, 2017. \newline URL: \textls[157]{\texttt{https://www.cs.cmu.edu/$\sim$16385/s17/Slides/11.4\_Triangulation.pdf}}
+
+$^{[8]}$pySerial API, приступ 22. 2. 2026.  URL: \textls[-85]{\texttt{https://pyserial.readthedocs.io/en/latest/pyserial\_api.html}}
+
+$^{[9]}$ARDUINODOCS, Serial, приступ 22. 2. 2026.  \newline URL: \textls[41]{\texttt{https://docs.arduino.cc/language-reference/en/functions/communication/serial}}
