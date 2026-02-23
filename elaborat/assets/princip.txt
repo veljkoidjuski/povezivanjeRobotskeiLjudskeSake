@@ -15,7 +15,6 @@
 \begin{equation}
 {\bm{r_1} \times \bm{P_1}\bm{R} = \bm{0}} \quad \wedge \quad {\bm{r_2} \times \bm{P_2}\bm{R} = \bm{0}}
 \end{equation}
-\vskip0.5\baselineskip
 \textit{Сингуларна декомпозиција матрице}. Свака матрица може се записати у облику производа матрица $\bm{U}\bm{\mathit{\Sigma}} \bm{V}^\dagger$, где су $\bm{U}$ и $\bm{V}^\dagger$ ротације, а $\bm{\mathit{\Sigma}}$ --- скалирање$^{[3]}$.
 \vskip.5\baselineskip
 \textls[250]{2. 2. \textit{Хардвер пројекта}}$^{[4]}$

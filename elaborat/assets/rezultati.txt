@@ -11,5 +11,7 @@
 \begin{figure}
 \centering
 \includegraphics[keepaspectratio, width=\linewidth]{rezZaRad.png}
-\caption{\it лево: систем $\omega$ слуша нумеричне наредбе са рачунара; средина: тест-пример за тријангулацију са шаховницом; десно: 3D реконструкција одабраних углова шаховнице у односу на координатни почетак, ћошак картонског носача камера (розе на слици)}
+\caption{\it лево: систем $\omega$ слуша нумеричне наредбе са рачунара; средина: тест-пример за тријангулацију (симултане слике шаховнице); десно: 3D реконструкција одабраних углова шаховнице у односу на координатни почетак, ћошак картонског носача камера (розе на слици)}
+\vskip-0.7\baselineskip
+\caption*{Figure 2: \it left: system $\omega$ carrying out numerical commands from the computer; middle: a test case for triangulation (simultaneous images of a chessboard); right: 3D reconstruction of selected chessboard corners relative to the origin, i. e. the corner of the cardboard camera stand (shown in pink)}
 \end{figure}
