@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/TeX Live for SUSE Linux) (preloaded format=xelatex 2026.2.3)  23 FEB 2026 01:27
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/TeX Live for SUSE Linux) (preloaded format=xelatex 2026.2.3)  23 FEB 2026 01:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -636,10 +636,10 @@ L3 programming layer <2025-01-18>
 ### simple group (level 1) entered at line 4 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 10669 strings out of 474512
- 232202 string characters out of 5751823
+ 10668 strings out of 474512
+ 232195 string characters out of 5751823
  792956 words of memory out of 5000000
- 33493 multiletter control sequences out of 15000+600000
+ 33492 multiletter control sequences out of 15000+600000
  570363 words of font info for 125 fonts, out of 8000000 for 9000
  914 hyphenation exceptions out of 8191
  79i,8n,117p,1511b,464s stack positions out of 10000i,1000n,20000p,200000b,200000s
