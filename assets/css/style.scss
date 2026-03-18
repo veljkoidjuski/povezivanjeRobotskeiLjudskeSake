@@ -1,0 +1,39 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+.highlight .gi {
+  color: #825aaa
+}
+
+.highlight .s,
+.highlight .sb,
+.highlight .sc,
+.highlight .sd,
+.highlight .s2,
+.highlight .sh,
+.highlight .sx,
+.highlight .s1 {
+  color:#825aaa
+}
+
+.highlight .m,
+.highlight .mf,
+.highlight .mh,
+.highlight .mi,
+.highlight .il,
+.highlight .mo,
+.highlight .mb,
+.highlight .mx {
+  color:#825aaa
+}
+
+.highlight .ss {
+  color:#825aaa
+}
+
+header h1:before {
+  content:"⊹ ࣪ ˖";
+  font-size:24px
+}
