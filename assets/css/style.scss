@@ -4,7 +4,7 @@
 @import "{{ site.theme }}";
 
 .highlight .gi {
-  color: #825aaa
+  color: #825aaa !important
 }
 
 .highlight .s,
@@ -15,7 +15,7 @@
 .highlight .sh,
 .highlight .sx,
 .highlight .s1 {
-  color:#825aaa
+  color:#825aaa !important
 }
 
 .highlight .m,
@@ -26,11 +26,11 @@
 .highlight .mo,
 .highlight .mb,
 .highlight .mx {
-  color:#825aaa
+  color:#825aaa !important
 }
 
 .highlight .ss {
-  color:#825aaa
+  color:#825aaa !important
 }
 
 header h1:before {
