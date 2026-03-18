@@ -2,4 +2,4 @@
 
 Репозиторијум секције роботике СТШ Сомбор – документација пројекта за такмичење Галаксија куп 2026.
 
-$$ ^P\vec{R} = \frac{\vec{R}\cdot\vec{P}}{\vec{P}\cdot\vec{P}}\vec{P} $$
+$$ \vec{^PR} = \frac{\vec{R}\cdot\vec{P}}{\vec{P}\cdot\vec{P}}\vec{P} $$
