@@ -1,8 +1,5 @@
 ---
 ---
-
-@import "{{ site.theme }}";
-
 .highlight .gi {
   color: #825aaa
 }
@@ -37,3 +34,7 @@ header h1:before {
   content:"⊹ ࣪ ˖";
   font-size:24px
 }
+
+
+@import "{{ site.theme }}";
+
