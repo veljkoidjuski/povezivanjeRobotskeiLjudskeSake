@@ -51,7 +51,7 @@ header h1 {
   line-height:1.5;
   margin:0 0 0 -40px;
   font-weight:bold;
-  font-family:Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+  font-family:"GT Eesti Pro Display Bold", Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
   color:#9e54e8;
   text-shadow:0 1px 1px rgba(0,0,0,0.1),0 0 5px rgba(158, 84, 232,0.1),0 0 10px rgba(158, 84, 232,0.1);
   letter-spacing:-1px;
@@ -65,9 +65,19 @@ h4,
 h5,
 h6 {
   font-weight:normal;
-  font-family:Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+  font-family:"GT Eesti Pro Display Bold", Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
   color:#9e54e8;
   text-shadow:0 1px 1px rgba(0,0,0,0.1),0 0 5px rgba(158, 84, 232,0.1),0 0 10px rgba(158, 84, 232,0.1);
   letter-spacing:-0.03em;
 
+}
+
+body {
+  margin:0;
+  padding:0;
+  background:#151515 url("../images/bkg.png") 0 0;
+  color:#eaeaea;
+  font-size:16px;
+  line-height:1.5;
+  font-family:"GT Eesti Pro Display Bold", Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace
 }
