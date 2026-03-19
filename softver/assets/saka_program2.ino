@@ -7,7 +7,8 @@ String ulaz;
 String nizUlaza[5] = { "" };
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
+  Serial.setTimeout(10);
   for (int i = 0; i < 5; i++)
   {
     servo[i].attach(motori[i]);
@@ -16,9 +17,11 @@ void setup() {
 }
 
 void loop() {
-  if (Serial.available())
+  while (Serial.available()>=16)
   {
-    ulaz = Serial.readString();
+
+    ulaz = Serial.readStringUntil('\n');
+    
     for (int i = 0; i < 5; i++)
     {
       nizUlaza[i] = "";
@@ -26,12 +29,14 @@ void loop() {
         nizUlaza[i] += ulaz[3 * i + j];
     }
 
+    for(int i = 0; i<5; i++)
+
     for (int i = 0; i < 5; i++) {
       angle[i] = nizUlaza[i].toInt();
-      Serial.println(angle[i]);
+      //Serial.println(angle[i]);
     }
 
-    while (Serial.available()) Serial.readString();
+   //while (Serial.available()) Serial.readString();
   }
 
   for (int i = 0; i < 5; i++)
