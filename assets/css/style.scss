@@ -3,6 +3,11 @@
 
 @import "{{ site.theme }}";
 
+@font-face {
+  font-family: gtEesti; /* set name */
+  src: url(gt-eesti-pro-display-regular.otf); /* url of the font */
+}
+
 .highlight .gi {
   color: #825aaa !important
 }
@@ -38,6 +43,8 @@ header h1:before {
   font-size:24px
 }
 
+
+
 header {
   background:rgba(0,0,0,0.1);
   width:100%;
@@ -51,7 +58,7 @@ header h1 {
   line-height:1.5;
   margin:0 0 0 -53px;
   font-weight:bold;
-  font-family:"gt-eesti-pro-display-regular.otf", Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+  font-family: gtEesti, Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
   color:#9e54e8;
   text-shadow:0 1px 1px rgba(0,0,0,0.1),0 0 5px rgba(158, 84, 232,0.1),0 0 10px rgba(158, 84, 232,0.1);
   letter-spacing:-0px;
@@ -65,7 +72,7 @@ h4,
 h5,
 h6 {
   font-weight:normal;
-  font-family:"gt-eesti-pro-display-regular.otf", Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+  font-family: gtEesti, Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
   color:#9e54e8;
   text-shadow:0 1px 1px rgba(0,0,0,0.1),0 0 5px rgba(158, 84, 232,0.1),0 0 10px rgba(158, 84, 232,0.1);
   letter-spacing:0em;
@@ -79,5 +86,5 @@ body {
   color:#eaeaea;
   font-size:18px;
   line-height:1.5;
-  font-family:"gt-eesti-pro-display-regular.otf", Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace
+  font-family: gtEesti, Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace
 }
