@@ -1,4 +1,3 @@
-
-
-https://github.com/user-attachments/assets/afd3a37a-88a7-4d55-b2ee-c916217005c3
-
+<video controls width="600">
+  <source src="{{ '/video.mp4' | relative_url }}" type="video/mp4">
+</video>
