@@ -4,4 +4,4 @@
 </video>
 </p>
 
-\vec{^PR} = \frac{\vec{P}\cdot\vec{R}}{\vec{P}\cdot\vec{P}} \vec{P}
+$$\vec{^PR} = \frac{\vec{P}\cdot\vec{R}}{\vec{P}\cdot\vec{P}} \vec{P}$$
