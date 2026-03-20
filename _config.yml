@@ -1,7 +1,12 @@
+markdown: kramdown
+kramdown:
+  math_engine: katex
+  math_engine_opts:
+    output: mathml
+
 remote_theme: pages-themes/hacker@v0.2.0
 plugins:
 - jekyll-remote-theme
-- jekyll-latex
 
 title: С ЛЕВОМ ДО ПОБЕДЕ!
 description: Пројекат секције Роботика СТШ Сомбор ,,Повезивање роботске и људске шаке"
