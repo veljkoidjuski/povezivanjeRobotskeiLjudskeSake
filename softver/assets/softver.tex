@@ -43,7 +43,7 @@ Sekcija robotike ST\v{S} Sombor
 Kalibracija kamera
 \endhead
 
-Kalibracija kamere jeste postupak kojim se utvr\dj uje matrica kamere $\bold{P}$, takva da je $$\bold{P} \bold{X} = \alpha \bold{x}, \eqno(1)$$ gde je $\bold{X}$ proizvoljna ta\v{c}ka prostora unutar vidnog polja kamere, $\bold{x}$ polo\v{z}aj iste ta\v{c}ke na slici, a $\alpha \in \Bbb{R}$. Kalibracija kamere omogu\'cava trijangulaciju ta\v{c}ke. Kalibracija kamere radi se jedanput, nakon \v{s}to se kamera fiksira --- nakon toga, matrica se vi\v{s}e ne menja (zavisi od polo\v{z}aja kamera te fizi\v{c}kih osobina so\v{c}iva i senzora) i nema potrebe ponavljati kalibraciju. 
+Kalibracija kamere jeste postupak kojim se utvr\dj uje matrica kamere $\bold{P}$, takva da je $$\alpha\bold{P} \bold{X} =  \bold{x}, \eqno(1)$$ gde je $\bold{X}$ proizvoljna ta\v{c}ka prostora unutar vidnog polja kamere, $\bold{x}$ polo\v{z}aj iste ta\v{c}ke na slici, a $\alpha \in \Bbb{R}$. Kalibracija kamere omogu\'cava trijangulaciju ta\v{c}ke. Kalibracija kamere radi se jedanput, nakon \v{s}to se kamera fiksira --- nakon toga, matrica se vi\v{s}e ne menja (zavisi od polo\v{z}aja kamera te fizi\v{c}kih osobina so\v{c}iva i senzora) i nema potrebe ponavljati kalibraciju. 
 
 Kalibracija kamere obavlja se pomo\'{c}u funkcije {\it calibrateCamera} biblioteke {\it cv2} (OpenCV), na osnovu test-slika (iste) \v{s}ahovnice. Funkcija prima:
 \roster
