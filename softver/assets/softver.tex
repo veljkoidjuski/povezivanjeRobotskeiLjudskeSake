@@ -12,14 +12,20 @@
 
 \def\dj{d\kern-0.5em\raise0.3em\hbox{--}}
 
+\def\Dj{d\kern-0.65em\raise0.04em\hbox{--}}
+
 \topmatter
 
 \title
 Softver projekta
 \endtitle
 
+\affil
+Povezivanje robotske i ljudske \v{s}ake
+\endaffil
+
 \abstract
-Hardver projekta podeljen je na dva glavna dela: sistem $\alpha$ i sistem $\omega$. U ovom radu opisan je hardver obaju delova projekta.
+U ovom radu opisan je softver sistema $\alpha$ i sistema $\omega$.
 \endabstract
 
 
@@ -37,6 +43,415 @@ Sekcija robotike ST\v{S} Sombor
 Kalibracija kamera
 \endhead
 
-Kalibracija kamere jeste postupak
+Kalibracija kamere jeste postupak kojim se utvr\dj uje matrica kamere $\bold{P}$, takva da je $$\bold{P} \bold{X} = \alpha \bold{x}, \eqno(1)$$ gde je $\bold{X}$ proizvoljna ta\v{c}ka prostora unutar vidnog polja kamere, $\bold{x}$ polo\v{z}aj iste ta\v{c}ke na slici, a $\alpha \in \Bbb{R}$. Kalibracija kamere omogu\'cava trijangulaciju ta\v{c}ke. Kalibracija kamere radi se jedanput, nakon \v{s}to se kamera fiksira --- nakon toga, matrica se vi\v{s}e ne menja (zavisi od polo\v{z}aja kamera te fizi\v{c}kih osobina so\v{c}iva i senzora) i nema potrebe ponavljati kalibraciju. 
+
+Kalibracija kamere obavlja se pomo\'{c}u funkcije {\it calibrateCamera} biblioteke {\it cv2} (OpenCV), na osnovu test-slika (iste) \v{s}ahovnice. Funkcija prima:
+\roster
+\item niz nizova vektora $((\bold{S}))$, koji daje koordinate ta\v{c}aka mre\v{z}e \v{s}ahovnice u njenom sopstvenom koordinatnom sistemu, izra\v{z}ene u jedinicama stranice polja \v{s}aho-vnice. Dat je jednako\v{s}\'cu (2), gde je $w$ \v{s}irina, a $h$ visina \v{s}ahovnice izra\v{z}ena u istim jedinicama. Svi nizovi $(\bold{S})$ me\dj usobno su jednaki --- njihovo umno\v{z}avanje stvar je implementacije funkcije. $$(\bold{S}) = (a_{n})_{0<n \le w}^{d=1} \times (b_{n})_{0<n \le h}^{d=1} \eqno(2)$$
+
+\item niz nizova vektora $((\bold{x}))$, koji daje za svaku sliku koordinate ta\v{c}aka mre\v{z}e \v{s}ahovnice u pikselima u koordinatnom sistemu kamere. Niz $(\bold{x})$ za datu (sivu) sliku utvr\dj uje se evaluacijom funkcije {\it findChessboardCorners} biblioteke {\it cv2} nad tom slikom, poznaju\'ci dimenzije \v{s}ahovnice u jedinicama stranice polja. 
+
+\item vektor $\bold{d}$, koji daje dimenzije slike u pikselima. U na\v{s}em slu\v{c}aju, to je vektor $\left [\smallmatrix 280 \\ 320 \endsmallmatrix \right ]$, jer koristimo slike \v{s}irine 320px i visine 280px.
+\endroster
+
+Izlaz f-je $calibrateCamera$ jeste 5-torka, \v{c}iji je najva\v{z}niji element matrica $\bold{K}$, takva da je: $$\bold{P} = \bold{K}[\bold{R}|\bold{t}] \eqno(3)$$
+Matrica $\bold{R}$ jeste matrica rotacije kamere, a vektor $\bold{t}$ --- vektor translacije kamere.
+
+Ispod je prilo\v{z}en kod. U njemu nije obavljena obrada matrice $\bold{K}$ --- to se radi u rutini za trijangulaciju. Napomena: konvencija imenovanja je izmenjena!
+
+\vskip\baselineskip
+
+{\eightpoint
+\verbatim
+
+import cv2
+from matplotlib import pyplot as plt
+import numpy as np
+import glob
+ 
+criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
+ 
+objp = np.zeros((7*9,3), np.float32)
+objp[:,:2] = np.mgrid[0:9,0:7].T.reshape(-1,2)
+ 
+objpoints = []
+imgpoints = [] 
+ 
+images = glob.glob('/home/veljaaas/Documents/sekcija/kamereDruga/*.png')
+images.sort()
+print(images)
+
+for fname in images:
+    print(fname)
+    img = cv2.imread(fname)
+    gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+ 
+    ret, corners = cv2.findChessboardCorners(gray, (9,7), None)
+
+    if ret == True:
+        objpoints.append(objp)
+ 
+        corners2 = cv2.cornerSubPix(gray,corners, (11,11), (-1,-1), criteria)
+        imgpoints.append(corners2)
+ 
+        cv2.drawChessboardCorners(img, (9,7), corners2, ret)
+        plt.imshow(img)
+        plt.show()
+
+
+ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(
+    objpoints, 
+    imgpoints, 
+    gray.shape[::-1], 
+    None, 
+    None
+)
+
+|endverbatim
+}
+
+\heading
+Prikupljanje slika
+\endheading
+
+Slike s kamera stalno preuzimaju dve zasebne niti, kako se ne bi zapunio bafer te kako bi glavna nit mogla dobijati slike u realnom vremenu (tj. kako glavna nit ne bi unosila ka\v{s}njenje u \v{c}itanje slika). Bele\v{z}e se samo najnoviji kadrovi s obeju kamera. Slike se preuzimaju metodima $grab$ i $release$ klase $VideoCapture$ biblioteke $cv${\it 2}. Metodom $grab$ prihvata se kadar iz bafera u privremeno skladi\v{s}te, pa se metodom $release$ isti predaje programu. Primer koda za jednu kameru prilo\v{z}en je ispod.
+
+{\eightpoint
+\verbatim
+
+
+def citajKamera1():
+  global kamera1Najnoviji
+  global camera1
+  while True:
+    if camera1.grab():
+      ret, kamera1Najnoviji = camera1.retrieve()
+nit1 = threading.Thread(target = citajKamera1, args=())
+nit1.start()
+
+|endverbatim
+}
+\heading
+Obrada slike
+\endheading
+
+Cilj obrade slike jeste merenje koordinata svih vrhova prstiju i drugih zna\v{c}ajnih ta\v{c}aka \v{s}ake na slikama s obeju kamera. Implementirana su dva metoda obrade slike: primenom biblioteke $mediapipe$ (pristup koji smo pozajmili) i primenom segmentacije po boji (pristup koji smo osmislili).
+
+\roster
+
+\item
+Biblioteka $mediapipe$ nudi istrenirani VI model za detekciju 21 zna\v{c}ajne ta\v{c}ke dlana. Prilo\v{z}enim ise\v{c}kom koda mo\v{z}e se formirati niz vektora kojim su date koordinate zna\v{c}ajnih ta\v{c}aka dlana na slici, ukoliko se dlan vidi dobro na slici.
+{\eightpoint
+\verbatim
+
+
+try:
+    detection_result = detector.detect(image)
+    koordinateA = np.array([(a.x*320, a.y*240) 
+         for a in detection_result.hand_landmarks[0]])
+except:
+    continue
+
+|endverbatim
+}
+\item
+Osnovna ideja postupka sa segmentacijom po boji jeste da, ukoliko ofarbamo svaki prst u drugu boju (kao i ,,koren'' dlana --- referentnu ta\v{c}ku), sve ostalo u kadru u\v{c}inimo hromatski neutralnim, uzmemo sliku te odredimo centre masa pojedina\v{c}nih boja, mo\v{z}emo doznati koordinate svih prstiju na toj slici.
+
+Uzimaju se dve slike (iz razloga koji \'ce kasnije biti definisan) --- jedna otvorene \v{s}ake, i jedna \v{s}ake u \v{z}eljenom polo\v{z}aju, tako da se izme\dj u njih nije desila rotacija \v{s}ake (translacija je dopu\v{s}tena i ne uti\v{c}e na dalje merenje). Nad obema slikama primenjuje se Gausov NF filtar u cilju smanjivanja detaljnosti slike (relevantni su samo veliki klasteri boja na vrhovima prstiju; detekcija drugih, neo\v{c}ekivanih stvari naru\v{s}ava rad programa). To omogu-\'cava f-ja $GaussianBlur$ biblioteke $cv2$. 
+
+Slike se potom prevode u $L*a*b*$ prostor boja, odabran iz tog razloga \v{s}to je u njemu nijansa svetla (koja \'ce ubrzo biti definisana) poprili\v{c}no invarijantna po intenzitetu svetlosti (ista povr\v{s}ina uvek \'ce imati pribli\v{z}no istu nijansu pod svetlom istog frekv. spektra). U odabranom prostoru boja, boja je zadata vektorom $\left[ \matrix L & a & b \\ \endmatrix \right]^\dagger \in (\Bbb{R}^3)^\dagger$, $a^2 + b^2 \in [0, {c_0}^2]$, $ L \in [0, L_0]$. Parametar $L$ odnosi se na osvetljaj, a $a$ i $b$ --- na hromatski sadr\v{z}aj. Nijansu mo\v{z}emo definisati kompleksnim brojem: $$\widehat{c} = a+jb\eqno(4)$$ (projekcija boje na $ab$ ravan). Moduo tog broja $c = \Vert\widehat{c}\Vert = \sqrt{\widehat{c}\, \widehat{c}\,^*} = \sqrt{a^2 + b^2}$ govori o zasi\'cenosti boje, a argument $\phi = \hbox{arg} \,\widehat{c} = \hbox{arctg} \, \tfrac{b}{a}$ --- o tome je li boja crvena, zelena itd. ($\phi = \pi \pm \pi$ --- crvena, $\phi = \pi/2$ --- \v{z}uta...). Barataju\'{c}i isklju\v{c}ivo tim brojem (stavljanjem $c$ i $\phi$ u granice) mogu se definisati pragovi detekcije prstiju. Na osnovu tih pragova mogu se generisati binarne slike koje ozna\v{c}avaju pojedina\v{c}ne prste. Primer implementacije dat je ispod (za plavu ref. ta\v{c}ku). Napomena: konvencija imenovanja je izmenjena!
+
+{\eightpoint
+\verbatim
+
+
+slika1cir = np.array(slika1fi.copy(), dtype=np.int32)
+maska1ir = 255*((np.arctan2(slika1cir[:,:,2]-128, 
+        slika1cir[:,:,1]-128) > -np.pi/2) 
+    & (np.arctan2(slika1cir[:,:,2]-128, 
+        slika1cir[:,:,1]-128) <= -np.pi/3.5) 
+    & (np.abs(slika1cir[:,:,1]-128 
+        + 1j* (slika1cir[:,:,2]-128)) > 0.1*256))
+
+|endverbatim
+}
+Kad su izdvojene binarne slike, koordinate centra mase lako se odre\dj uju primenom funkcija $argwhere$ i $mean$ biblioteke $numpy$. Funkcija $argwhere$ uzima $n$-dimenzionalni niz i vra\'{c}a niz 2-vektora $(\bold{x})$ gde svako $\bold{x}$ daje koordinate jedne od ta\v{c}aka u kojima je zapam\'cena vrednost razli\v{c}ita od 0. Funkcija $mean$ vra\'ca srednju vrednost prosle\dj enog niza. Ise\v{c}ak koda ispod malo je izmenjen radi lak\v{s}eg razumevanja imenovanja.
+{\eightpoint
+\verbatim
+
+
+def centarMase(maska1):
+   kz1 = np.argwhere(maska1)
+   cxz1 = np.mean(kz1[:,1])
+   cyz1 = np.mean(kz2[:,0])
+   return (cxz1, cyz1)
+   
+|endverbatim
+}
+
+Saznavanjem centara mase binarnih slika zavr\v{s}ena je obrada slike. Mana ovog pristupa jeste osetljivost na uslove osvetljenosti (iako je osetljivost na intenzitet svetlosti spre\v{c}ena). Ne mogu se tako lako odabrati dovoljno veliki segmenti spektra boja kao granice za svaki prst jer bi se preklopili!
+
+
+\endroster
+
+\heading Triangulacija ta\v{c}aka \endheading
+
+
+Triangulacija ta\v{c}ke jeste problem utvr\dj ivanja polo\v{z}aja ta\v{c}ke u prostoru na osnovu njenog polo\v{z}aja u dvema slikama, vremenski koincidentalnim a prostorno nekoincidentalnim. Ukoliko poznajemo polo\v{z}aje ta\v{c}ke na slikama s kamera 1 i 2 $\bold{r}_1$ i $\bold{r}_2$ te matrice kamera 1 i 2 $\bold{P}_1$ i $\bold{P}_2$ problem se svodi na nala\v{z}enje takvih realnih parametara $\alpha$ i $\beta$ i takve ta\v{c}ke $\bold R$ da bude $$\bold{r}_1 = \alpha\bold{P}_1\bold{R} \bigwedge \bold{r_2} = \beta\bold{P}_2\bold{R}.\eqno(5)$$ 
+
+Taj sistem jednakosti, me\dj utim, u ovom obliku nije naro\v{c}ito koristan, budu\'ci da ima tri nepoznate.  Primetimo da va\v{z}i $$\bold{P}_i \bold{R}\times \bold{r}_i = \bold{0}. \eqno(6)$$ 
+
+Tako su iz posla sklonjeni parametri $\alpha$ i $\beta$, i jedina preostala nepoznata jeste $\bold{R}$. Uz odre\dj ene transformacije: 
+
+$$ \bmatrix y_1 \bold{p}_{13}^\dagger - \bold{p}_{12}^\dagger  \\\bold{p}_{11}^\dagger - x_1\bold{p}_{13}^\dagger \\ y_2 \bold{p}_{23}^\dagger - \bold{p}_{22}^\dagger  \\\bold{p}_{21}^\dagger - x_2\bold{p}_{23}^\dagger \endbmatrix \bold{R} = \bold{0}, \eqno(7)
+$$
+
+gde je $\bold{p}_{ij}$ $j$-ta kolona matrice $\bold{P}_i$. Skra\'ceno:
+
+$$\bold{A}\bold{R} = \bold{0}. \eqno(8)$$
+
+U prakti\v{c}noj primeni, re\v{s}avanje jednakosti (8) bi\'ce jalovo --- re\v{s}enje naj\v{c}e\v{s}\'ce ne\'cemo dobiti jer se zbog postojanja nenulte gre\v{s}ke merenja zraci koji upadaju u kamere a na kojima le\v{z}e merene ta\v{c}ke u najve\'em broju slu\v{c}ajeva razmimoilaze. Problem, dakle, treba modifikovati u minimizaciju. $$\bold{R} = \hbox{arg min}_{\bold{Q}, \bold{\Vert Q \Vert} = 1}\Vert\bold{A}\bold{Q}\Vert \eqno(9)$$
+($\bold{R}$ i $\bold{Q}$ dati su homogenim koordinatama; ograni\v{c}enje intenziteta jeste fiktivno i slu\v{z}i da omogu\'ci dalji rad). Primenjuje se jedan vrlo elegantan metod re\v{s}avanja (9). Naime, ukoliko je singularna dekompozicija matrice $\bold{A}=\bold{U}\pmb{\Sigma}\bold{V^\dagger}$, garantuje se da je tra\v{z}eno $\bold{R}$ dato krajnjom desnom kolonom matrice $\bold{V}$.
+
+Implementacija ovog algoritma u kodu data je ispod. Nema potrebe raditi konverziju u bilo koje konkretne jedinice du\v{z}ine --- ostatak posla zasnovan je na odnosima. Koordinatnim po\v{c}etkom smatra se ugao kartonskog nosa\v{c}a.  Napomena: konvencija imenovanja je izmenjena!
+
+{\eightpoint
+\verbatim
+
+
+def trijangulacijaTacke(r1, r2):
+  kameraB = np.array([
+     [1, 0, 0, -1], 
+     [0, 0, -1, 0], 
+     [0, 1, 0, 0]
+  ])
+  kameraB = np.dot(0.5*np.array([
+     [772.81013182, 0, 320],
+     [0, 779.95788961, 240 ],
+     [0,0,2]
+  ]), kameraB)
+  kameraA = np.array([[0, -1, 0, 1], 
+     [0, 0, -1, 0], 
+     [1, 0, 0, 0]
+  ])
+  kameraA = np.dot(0.5*np.array([[768.3329645, 0, 320],
+     [0, 770.36287522, 240 ],
+     [0,0,2]
+  ]), kameraA)
+  A = np.array([
+      (r1[1])*kameraA[2] - kameraA[1],
+      kameraA[0] - (r1[0])*kameraA[2],
+      (r2[1])*kameraB[2] - kameraB[1],
+      kameraB[0] - (r2[0])*kameraB[2],
+  ])
+  U, S, Vt = np.linalg.svd(A)
+  trazeni = Vt[-1]
+  izlaz = trazeni[:3]/trazeni[-1]
+  return izlaz
+
+|endverbatim
+}
+\heading Utvr\Dj \,ivanje upravlja\v{c}kih brojeva \endheading
+
+Kako je preslikavanje $\bold{\Delta p} \rightarrow \bold{\Delta R}$ (gde je $\Delta \bold{R}$ vektor pomeraja od korena \v{s}ake do vrha prsta, a $\bold{\Delta p}$ projekcija istog na pravac odre\dj en opru\v{z}enim prstom) za robotsku \v{s}aku jednozna\v{c}no, upravljanje se svodi na pra\'cenje odnosa $\tfrac{\Vert \bold{\Delta p} \Vert}{\Vert \bold{\Delta R}_0 \Vert}$ za ljudsku \v{s}aku, gde je $\Vert \bold{\Delta R_0} \Vert$ du\v{z}ina opru\v{z}enog prsta, i evaluaciju inverza modela prsta nad tim odnosom (unutar zadatih granica kodomena).
+
+U zavisnosti od metoda koji smo primenili za merenje zna\v{c}ajnih koordinata razlikujemo i dva postupka merenja vektora opru\v{z}enog prsta $\bold{\Delta R}_{0}$.
+
+\roster
+
+\item
+Ukoliko se koristi biblioteka $mediapipe$, pravac opru\v{z}enog prsta mo\v{z}e se aproksimirati vektorom pomeraja od korena \v{s}ake do korena prsta (smatramo da opru\v{z}eni prst le\v{z}i u ravni dlana, na tom pravcu), a du\v{z}ina opru-\v{z}enog prsta --- zbirom du\v{z}ina svih njegovih segmenata od korena \v{s}ake do vrha prsta.
+
+$$ \bold{\Delta R}_{0} := \sum_{prst} \Vert \Delta \bold{R}_{segment} \Vert \cdot \dfrac{\bold{R}_{koren\,prsta} - \bold{R}_{koren\,sake}}{\Vert \bold{R}_{koren\,prsta} - \bold{R}_{koren\,sake} \Vert} \eqno(10)$$
+
+\item
+Ako se pak koristi ,,doma\'ci'' pristup sa segmentacijom po boji, taj vektor mora se odrediti pomo\'cu slika ra\v{s}irene \v{s}ake, prostim oduzimanjem koordinata vrha prsta i referentne plave ta\v{c}ke.
+
+$$ \bold{\Delta R}_{0} :=_{_{_{(ref.\, slike)}}} \bold{R}_{vrh\,prsta} - \bold{R}_{ref} \eqno(11)$$
+
+\endroster
+
+Vektor prsta $\Delta \bold{R}$ u oba slu\v{c}aja odre\dj uje se oduzimanjem vrha prsta i ref. ta\v{c}ke (u slu\v{c}aju prvog pristupa to je koren \v{s}ake, a u slu\v{c}aju drugog --- plava ta\v{c}ka).
+
+$$ \bold{\Delta R} :=  \bold{R}_{vrh\,prsta} - \bold{R}_{ref} \eqno(12)$$
+
+Vektor $\bold{\Delta p}$ dat je slede\'cim obrascem:
+
+$$\bold{\Delta p} := \Vert \bold{\Delta R} \Vert \cos \measuredangle (\bold{\Delta R}_0, \bold{\Delta R})  \dfrac{\bold{\Delta R_0}}{\Vert \bold{\Delta R_0}\Vert}= \dfrac{\Delta \bold{R}_0 \cdot \Delta \bold{R}}{\Delta \bold{R}_0 \cdot \Delta \bold{R}_0} \Delta \bold{R}_0. \eqno(13)$$
+
+Tra\v{z}eni odnos o\v{c}evidno jeste:
+
+$$\dfrac{\Vert \bold{\Delta p} \Vert}{\Vert \bold{\Delta R}_0 \Vert} = \dfrac{\Delta \bold{R}_0 \cdot \Delta \bold{R}}{\Delta \bold{R}_0 \cdot \Delta \bold{R}_0}. \eqno(14)$$
+
+Kretanje prsta modelovano je izvesnim preslikavanjem $f: \theta \rightarrow \tfrac{\Vert \bold{\Delta p} \Vert}{\Vert \bold{\Delta R}_0 \Vert} $, gde je $\theta \in [0, 1]$  ugao otklona motora. Funkcija $f$ je za svaki prst uzorkovana u 180 ravnomerno raspore\dj enih ta\v{c}aka domena izme\dj u 0 i 1 i zabele\v{z}ena u lookup tabelu. Kako $\theta \sim N$, gde je $N \in [0, 180] \cap \Bbb{Z}$ broj zadat motoru --- pri \v{c}emu $N=180$ rezultuje maksimalnim savijanjem prsta, a $N=0$ potpunim opru\v{z}anjem --- indeks \v{z}eljenog $\tfrac{\Vert \bold{\Delta p} \Vert}{\Vert \bold{\Delta R}_0 \Vert}$ u tabeli jeste broj koji treba zadati motoru. Za to se koristi binarna pretraga, tj. funkcija $bisect$ biblioteke $bisect$.
+
+Kod za slu\v{c}aj kada se koristi biblioteka $mediapipe$ dat je ispod.  Napomena: konvencija imenovanja je izmenjena; kod je malo modifikovan radi lak\v{s}eg razumevanja.
+
+{\eightpoint
+\verbatim
+
+
+def utvrdiDuzinuOpruzenog(tT, rbr):
+  out = 0
+  if rbr in range(1, 5):
+    out = np.linalg.norm(tT[0]-tT[1+rbr*4])
+        +np.linalg.norm(tT[1+rbr*4]-tT[2+rbr*4])
+        +np.linalg.norm(tT[2+rbr*4]-tT[3+rbr*4])
+        +np.linalg.norm(tT[3+rbr*4]-tT[4+rbr*4])
+  elif rbr==0:
+    out = np.linalg.norm(tT[0] - tT[2])
+        +np.linalg.norm(tT[2]-tT[3])
+        +np.linalg.norm(tT[3]-tT[4])
+  return out
+def projekcija(tT, rbr):
+  if rbr in range(1, 5):
+    P = tT[1+4*rbr]-tT[0]
+    R = tT[4+4*rbr]-tT[0]
+    return (R@P)/(P@P)*P
+  elif rbr==0:
+    P = tT[2]-tT[0]
+    R = tT[4]-tT[0]
+    return (R@P)/(P@P)*P
+def upravljackiBrojevi():
+    global trijanulisaneTacke
+    duzinePruzenih = np.array(
+         [utvrdiDuzinuOpruzenog(trijangulisaneTacke, i) for i in range(5)]
+    )
+    duzineProjekcija = np.array(
+        [np.linalg.norm(projekcija(trijangulisaneTacke, i)) for i in range(5)]
+    )
+    omer = np.zeros(5, dtype=np.float32)
+    omer = duzineProjekcija/duzinePruzenih
+    izlazi = np.zeros(5, dtype=np.uint8)
+    izlazi[0] = bisect.bisect(-palacModel, -omer[0])
+    izlazi[1] = bisect.bisect(-kaziprstModel, -omer[1])
+    izlazi[2] = bisect.bisect(-srednjakModel, -omer[2])
+    izlazi[3] = bisect.bisect(-domaliModel, -omer[3])
+    izlazi[4] = bisect.bisect(-maliModel, -omer[4])
+    return izlazi
+
+|endverbatim
+}
+
+Sledi primer koda (za mali prst) za slu\v{c}aj kada se koristi segmentacija po boji.  Napomena: konvencija imenovanja je izmenjena; kod je malo modifikovan radi lak\v{s}eg razumevanja.
+
+{\eightpoint
+\verbatim
+
+
+
+def upravljackiBrojMali():
+    global izlaziz1
+    global izlaziz2
+    global izlazz1
+    global izlazz2
+    P = izlaziz1 - izlazir1
+    R = izlazz1 - izlazr1
+    Pp = (R@P)/(P@P)
+    izlaz = bisect.bisect(-maliModel, -Mp)
+    return izlaz
+
+|endverbatim
+}
+
+
+Modeli prstiju dobijaju se fitovanjem parametrizovanih funkcija kroz merenja prstiju, na slede\'ci na\v{c}in:
+
+{\eightpoint
+\verbatim
+
+
+
+def palacFja(x):
+  return 0.56*np.sin(2.02*x+1.62)+0.449
+def kaziprstFja(x):
+  return 0.29*np.sin(2.89*x+1.87)+0.71
+def srednjakFja(x):
+  return 0.33*np.sin(2.46*x+1.94)+0.67
+def domaliFja(x):
+  return 0.38*np.sin(3.25*x+1.89)+0.64
+def maliFja(x):
+  return -0.45*x**2 -0.13*x + 0.99
+palacModel = palacFja(np.linspace(0, 1, 180))
+kaziprstModel = kaziprstFja(np.linspace(0, 0.9859, 176))
+srednjakModel = srednjakFja(np.linspace(0, 1, 180))
+domaliModel = domaliFja(np.linspace(0, 0.8684, 156))
+maliModel = maliFja(np.linspace(0, 1, 180))
+|endverbatim
+}
+
+Prsti se u trenutku pisanja rada modeluju funkcijama svedenim na jedan harmonik i konstantu, tj. f-jama oblika $A\sin(B\theta + C)+D$, budu\'ci da se osmi\v{s}ljeni model ,,Kinderica'' pokazao previ\v{s}e osetljivim na neidealnosti prstiju. Model malog prsta naknadno je razvijen po Tejloru do kvadratnog \v{c}lana zbog uticaja nepreciznosti ra\v{c}una s pokretnim zarezom (dva parametra njegove sinusoide devetog su reda veli\v{c}ina, a ostali brojevi s kojima radimo --- reda $10^{-1}$ ili $10^1$). Domeni odre\dj enih f-ja su\v{z}eni su zbog neo\v{c}ekivanog javljanja prevojnih ta\v{c}aka na domenu [0, 1] (tj. dvozna\v{c}nosti inverza).
+
+\heading Kodovanje i slanje poruka \endheading
+
+Upravlja\v{c}ki brojevi koduju se u $128$-bitnu poruku oblika $$\overline{A_1A_2A_3B_1B_2B_3C_1C_2C_3D_1D_2D_3E_1E_2E_3N},$$ tako da je $K_i$ reprezentacija u kodu ASCII $i$-te cifre sleva trocifrene dekadne reprezentacije broja $K$, a $N$ znak u kodu ASCII za novi red. Takvu poruku posebna nit prosle\dj uje sistemu $\omega$ primenom metoda $write$ klase $Serial$ biblioteke $pyserial$. Kod je prikazan ispod. 
+
+{\eightpoint
+\verbatim
+
+
+def arduinoIzlaz():
+  arduino = serial.Serial(port='/dev/ttyACM0', baudrate=115200, timeout=.2)
+  vreme = 0
+  global komanda
+  while True:
+    arduino.write(bytes(komanda, 'ascii'))
+    arduino.reset_output_buffer()
+nit3 = threading.Thread(target = arduinoIzlaz, args=())
+nit3.start()
+
+while True:
+    ...
+    komanda = "".join([f"{x:03}" for x in izlazi]) + "\n"
+
+|endverbatim
+}
+
+\specialhead
+SISTEM $\pmb\omega$
+\endspecialhead
+
+Softver sistem $\omega$ krajnje je jednostavan i jedina mu je namena primljene upravlja\v{c}ke brojeve konvertovati u upravlja\v{c}ke signale za motore. Kada se u baferu USB porta na\dj e celovita poruka du\v{z}ine $128$ bita, Arduino Uno je prihvati, iscepa na troslovne segmente i odbaci znak za novi red, protuma\v{c}i segmente kao dekadne brojeve i na osnovu njih generi\v{s}e odgovaraju\'ce PWM signale na pinovima na koje su vezani motori. Kod je prilo\v{z}en ispod.
+
+{\eightpoint
+\verbatim
+
+
+#include<Servo.h>
+Servo servo[5];
+int angle[5] = { 0 };
+int motori[5] = {3, 5, 6, 9, 10};
+int c = 0;
+String ulaz;
+String nizUlaza[5] = { "" };
+void setup() {
+  Serial.begin(115200);
+  Serial.setTimeout(10);
+  for (int i = 0; i < 5; i++)
+  {
+    servo[i].attach(motori[i]);
+    servo[i].write(angle[i]);
+  }
+}
+void loop() {
+  while (Serial.available()>=16)
+  {
+    ulaz = Serial.readStringUntil('\n');
+    for (int i = 0; i < 5; i++)
+    {
+      nizUlaza[i] = "";
+      for (int j = 0; j < 3; j++)
+        nizUlaza[i] += ulaz[3 * i + j];
+    }
+    for (int i = 0; i < 5; i++)
+      angle[i] = nizUlaza[i].toInt();
+  }
+  for (int i = 0; i < 5; i++)
+    servo[i].write(angle[i]);
+}
+
+|endverbatim
+
+}
 
 \bye
