@@ -18,3 +18,5 @@ $^{[7]}$Kris Kitani, Triangulation, \textit{16-385 Computer Vision}, Carnegie Me
 $^{[8]}$pySerial API, приступ 22. 2. 2026.  URL: \textls[-85]{\texttt{https://pyserial.readthedocs.io/en/latest/pyserial\_api.html}}
 
 $^{[9]}$ARDUINODOCS, Serial, приступ 22. 2. 2026.  \newline URL: \textls[41]{\texttt{https://docs.arduino.cc/language-reference/en/functions/communication/serial}}
+
+$^{[10]}$Google AI Edge, Hand Landmarks Detection Guide, приступ 19. 3. 2026.  \newline URL: \textls[96]{\texttt{https://ai.google.dev/edge/mediapipe/solutions/vision/hand\_landmarker}}
