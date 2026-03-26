@@ -3,6 +3,8 @@
 
 @import "{{ site.theme }}";
 
+$base-font-size: 20px;
+
 @font-face {
   font-family: gtEesti; /* set name */
   src: url(gt-eesti-pro-display-regular.otf); /* url of the font */
