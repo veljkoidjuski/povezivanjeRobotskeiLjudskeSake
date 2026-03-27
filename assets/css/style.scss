@@ -81,6 +81,15 @@ h6 {
 
 }
 
+#oznaceniTekst
+{
+  font-weight:normal;
+  font-family: gtEesti, Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+  color:#9e54e8;
+  text-shadow:0 1px 1px rgba(0,0,0,0.1),0 0 5px rgba(158, 84, 232,0.1),0 0 10px rgba(158, 84, 232,0.1);
+  letter-spacing:0em;
+}
+
 body {
   margin:0;
   padding:0;
