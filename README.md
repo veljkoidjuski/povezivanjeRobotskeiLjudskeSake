@@ -7,7 +7,7 @@
 Дефинисани циљ пројекта јесмо испунили, али крај се не назире. Стремимо расту пројекта и свим срцем хрлимо у нове инжењерске подвиге! Подржите нас на нашем путу до победе: прва станица --- <span class="oznaceniTekst"> Галаксија куп! </span>
 
 <p align=center>
-<video controls width="600">
+<video controls style="width:80%">
   <source src="{{ '/video.mp4' | relative_url }}" type="video/mp4">
 </video>
 </p>
